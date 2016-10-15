@@ -24,7 +24,7 @@ def cli(input, output):
     For more information, see https://github.com/muziejus/text_divider
     """
     text = Text(input, output)
-    text.toCsv()
+    text.to_csv()
 
 class Text():
     def __init__(self, input, output):
@@ -79,7 +79,16 @@ class Text():
             raise Exception("No such speaker found!")
         return " ".join(speaker_lines)
 
-    def toCsv(self):
+    def all_speakers(self):
+        lines = self.parse()
+        speakers = set([line['speaker'] for line in lines])
+        list = []
+        for speaker in speakers:
+            lines_of_dialogue = len([line for line in lines if line['speaker'] == speaker])
+            list.append((speaker, lines_of_dialogue))
+        return list
+
+    def to_csv(self):
         lines = self.parse()
         self.output.write("CHAPTER\tSPEAKER\tTEXT\n")
         for line in lines:

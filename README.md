@@ -47,14 +47,10 @@ or
 >>> import text_divider as td
 >>> divided_text = td.parse('FILENAME')
 >>> speakers = divided_text.all_speakers() # returns speakers and the lines of dialogue
-[('Alice', 15), ('Bob', 17)]
->>> alice = divided_text.speakers('Alice') # returns a string of all of the speaker’s dialogue
-'Hi, Bob, how are you? I’m also fine, thanks for asking. Yes, I’d love to…'
->>> import nltk # or do whatever you want with the string.
->>> from nltk.tokenize import word_tokenize
->>> alice_corpus = word_tokenize(alice.lower())
->>> alice_corpus
-['hi', ',', 'bob', ',', 'how', 'are', 'you', '?', 'i’m', 'also', 'fine', ',', 'thanks', 'for', 'asking', '.', 'yes', ',', 'i’d', 'love', 'to…']
+>>> print(speakers)
+[('Mr. Carraway', 3), ('Tom', 2), ('Daisy', 2), (None, 18), ('Nick', 3)]
+>>> nick = divided_text.speakers('Nick') # returns a string of all of the speaker’s dialogue
+'The whole town is desolate. All the cars have the left rear wheel painted black as a mourning wreath, and there’s a persistent wail all night along the north shore.'
 ```
 
 ## Output
