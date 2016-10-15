@@ -28,6 +28,38 @@ Prof. Hoover’s markup is:
 
 Every tag that is commented out with a `#` is currently unimplemented. 
 
+Dialogue, as noted above, is triggered by the `/`. All text between that and
+the first `“` or `"` is understood to be the character’s name, and everything
+after the quote marker is understood to be dialogue. It currently does not
+support UK-style single-quoting, guillemets (`«»`), German-style low 9 quoting (`„“`),
+or Russian/Joyce-style quotation dashes. It strikes me that converting those on the
+fly to the pattern the system does understand can be done with a vim macro.
+
+Dialogue ends with a blank line. Hence a line like:
+
+```
+“Hello,” said Alice, “And good-bye!” Then she walked away.
+```
+
+would be marked up as:
+
+```
+/Alice H.“Hello,”
+
+said Alice,
+
+/Alice H.“And good-bye!”
+
+Then she walked away.
+```
+
+With two handy vim macros, breaking this up becomes rather easy. In a speakers
+export, Alice H.’s dialogue would be concatenated into a file called
+`aliceh.txt`.
+
+Prof. Hoover’s system also lets you mark the “reporting clause” (“said Alice,”
+in the example above), but that feature is not yet implemented here.
+
 The file `sample.txt` is the file used for testing and also reveals how the
 markup can look in the wild.
 
@@ -63,11 +95,15 @@ or you can get a bit fancier and make use of more methods using it as a module:
 
 ## Output
 
-Using it with the command line gives a result similar to that of the original
-spreadsheet. It creates a `.csv` file where each line of text is marked (or
-not) depending on what division it is in. For example, there might be a
-“Dialogue” column, and the value for the lines could be blank, “Alice,” or
+Using it with the command line gives a result similar to that of Prof. Hoover’s
+original spreadsheet. It creates a `.csv` file where each line of text is
+marked (or not) depending on what division it is in. For example, there might
+be a “Dialogue” column, and the value for the lines could be blank, “Alice,” or
 “Bob,” depending.
+
+You can additionally pass the `--speakers-export` option with a path to a
+directory, into which the program will place a separate `.txt` file for each
+speaker.
 
 Using it in the interpreter or within a program creates a list where each value
 is a dictionary with keys as the column names. The current column names are:
