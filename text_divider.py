@@ -12,9 +12,10 @@ import os
 
 @click.command()
 @click.option('--speakers-export', type=click.Path(file_okay=False, writable=True), help="This is the directory to which the separate speakers’ files will be exported. Setting this automatically triggers the export command.")
+@click.option('--sections-export', type=click.Path(file_okay=False, writable=True), help="This is the directory to which the separate sections’ files will be exported. Setting this automatically triggers the export command.")
 @click.argument('input') #, type=click.File('rb'))
 @click.argument('output', type=click.File('w'), default='-', required=False)
-def cli(input, output, speakers_export):
+def cli(input, output, speakers_export, sections_export):
     """
     This script takes a lightly-marked text file and generates a .csv file
     where each line of text is tagged in some way.
@@ -26,6 +27,8 @@ def cli(input, output, speakers_export):
     For more information, see https://github.com/muziejus/text_divider
     """
     text = Text(input)
+    if sections_export:
+        text.export_sections_to_txt(sections_export)
     if speakers_export:
         text.export_speakers_to_txt(speakers_export)
     text.to_csv(output)
@@ -56,7 +59,7 @@ class Text():
         """
         list = []
         speaker = None
-        chapter = None
+        section_one = None
         for line in self.lines:
             text = line
             if(re.search(r'^\s*$', line)): # blank line reset
@@ -70,9 +73,9 @@ class Text():
                     if(re.search(r'["”]\s*$', text)):
                         text = re.sub(r'["”]\s*$', '', text)
                 if(line[0:3] == "<1>"):
-                    chapter = line[3:]
+                    section_one = line[3:]
                     text = line[3:]
-                list.append({"text": text, "speaker": speaker, "chapter": chapter})
+                list.append({"text": text, "speaker": speaker, "section_one": section_one})
         return list
 
     def speakers(self, speaker):
@@ -113,14 +116,31 @@ class Text():
             f.write(self.speakers(speaker))
             f.close()
 
+    def export_sections_to_txt(self, output_dir = "sections_export"):
+        """
+        Exports each section as a string into its own text file.
+        """
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        sections = set([line['section_one'] for line in self.parse()])
+        for section in sections:
+            if section == None:
+                section_file = "none"
+            else:
+                section_file = self.parameterize(section)
+            f = open("{0}/{1}.txt".format(output_dir, section_file), "w")
+            f.write(" ".join([line['text'] for line in self.parse() if line['section_one'] == section]))
+            f.close()
+        
+
     def to_csv(self, output):
         """
         Dumps all the data to a (tab-delimited) .csv
         """
         lines = self.parse()
-        output.write("CHAPTER\tSPEAKER\tTEXT\n")
+        output.write("SECTION 1\tSPEAKER\tTEXT\n")
         for line in lines:
-            output.write("{0}\t{1}\t{2}\n".format(line['chapter'], line['speaker'], line['text']))
+            output.write("{0}\t{1}\t{2}\n".format(line['section_one'], line['speaker'], line['text']))
 
     def parameterize(self, string):
         """

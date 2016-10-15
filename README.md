@@ -31,7 +31,7 @@ Every tag that is commented out with a `#` is currently unimplemented.
 Dialogue, as noted above, is triggered by the `/`. All text between that and
 the first `“` or `"` is understood to be the character’s name, and everything
 after the quote marker is understood to be dialogue. It currently does not
-support UK-style single-quoting, guillemets (`«»`), German-style low 9 quoting (`„“`),
+support UK-style single-quoting, guillemets (`«»`), German-style low-9-quoting (`„“`),
 or Russian/Joyce-style quotation dashes. It strikes me that converting those on the
 fly to the pattern the system does understand can be done with a vim macro.
 
@@ -103,14 +103,14 @@ be a “Dialogue” column, and the value for the lines could be blank, “Alice
 
 You can additionally pass the `--speakers-export` option with a path to a
 directory, into which the program will place a separate `.txt` file for each
-speaker.
+speaker. The same happens with `--sections-export`, but for the top-level section.
 
 Using it in the interpreter or within a program creates a list where each value
 is a dictionary with keys as the column names. The current column names are:
 
 ```
 text: the line of text
-chapter: the chapter name for the current line
+section-one: the name of the top-level section for the current line
 speaker: the speaker of the current line, if one is named.
 ```
 
