@@ -1,4 +1,4 @@
-# text-divider
+# text_divider
 
 This is a Python implementation of David Hoover's [Analyze Textual Divisions
 Spreadsheet](https://wp.nyu.edu/exceltextanalysis/analyzetextualdivisions/).
@@ -36,12 +36,12 @@ markup can look in the wild.
 
 For now, the usage is simply:
 
-`python text-divider.py [FILENAME]`
+`python text_divider.py [FILENAME]`
 
 or
 
 ```
->>> import text-divider as td
+>>> import text_divider as td
 >>> divided_text = td.parse('FILENAME')
 >>> speakers = divided_text.speakers # returns speakers and the lines of dialogue
 [('Alice', 15), ('Bob', 17)]
