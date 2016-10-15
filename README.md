@@ -75,7 +75,7 @@ speaker: the speaker of the current line, if one is named.
 
 I couldn’t get Prof. Hoover’s spreadsheet to work on my computer, but I also
 think that this tool makes it easy to feed customized text into
-`[NLTK](http://www.nltk.org)`. Specifically, I wanted a way to mark up a `.txt`
+[`NLTK`](http://www.nltk.org). Specifically, I wanted a way to mark up a `.txt`
 version of *[The Great Gastby](http://gutenberg.net.au/ebooks02/0200041.txt)*
 so that I could programmatically get the dialogue on the fly. It strikes me
 that the light markup of this program is more flexible and quicker to implement
