@@ -63,12 +63,12 @@ class Text():
                 speaker = None
             else:
                 if(line[0] == '/'): # dialogue trigger
-                    match = re.match(r'/([^"]*)"(.*)$', line)
+                    match = re.match(r'/([^"“]*)["“](.*)$', line)
                     speaker = match.group(1)
                     text = match.group(2)
                 if(speaker != None): # strip trailing " from dialogue.
-                    if(re.search(r'"\s*$', text)):
-                        text = re.sub(r'"\s*$', '', text)
+                    if(re.search(r'["”]\s*$', text)):
+                        text = re.sub(r'["”]\s*$', '', text)
                 if(line[0:3] == "<1>"):
                     chapter = line[3:]
                     text = line[3:]
