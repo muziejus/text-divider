@@ -11,9 +11,10 @@ import re
 import os
 
 @click.command()
+@click.option('--speakers-export', type=click.Path(file_okay=False, writable=True), default="speakers_export", help="This is the directory to which the separate speakers’ files will be exported. Setting this automatically triggers the export command.")
 @click.argument('input') #, type=click.File('rb'))
 @click.argument('output', type=click.File('w'), default='-', required=False)
-def cli(input, output):
+def cli(input, output, speakers_export):
     """
     This script takes a lightly-marked text file and generates a .csv file
     where each line of text is tagged in some way.
@@ -25,6 +26,8 @@ def cli(input, output):
     For more information, see https://github.com/muziejus/text_divider
     """
     text = Text(input)
+    if speakers_export:
+        text.export_speakers_to_txt(speakers_export)
     text.to_csv(output)
 
 class Text():
@@ -94,9 +97,7 @@ class Text():
             list.append((speaker, lines_of_dialogue))
         return list
 
-    def export_speakers_as_text(self, output_dir = "speakers_export"):
-        # this should be an option available in the cli.
-        # and the output dir should be passable from the cli.
+    def export_speakers_to_txt(self, output_dir = "speakers_export"):
         """
         Exports each speaker’s dialogue as a string into its own text file.
         """

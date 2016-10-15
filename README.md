@@ -1,6 +1,6 @@
 # text_divider
 
-This is a Python implementation of David Hoover's [Analyze Textual Divisions
+This is a Python implementation of David Hoover’s [Analyze Textual Divisions
 Spreadsheet](https://wp.nyu.edu/exceltextanalysis/analyzetextualdivisions/).
 The spreadsheet is a suite of macros that takes text that has been “lightly
 marked-up” and creates a spreadsheet that categorizes each line in the text
@@ -26,7 +26,7 @@ Prof. Hoover’s markup is:
 #^          special character follows
 ```
 
-Every tag that is “commented out” with a `#` is currently unimplemented. 
+Every tag that is commented out with a `#` is currently unimplemented. 
 
 The file `sample.txt` is the file used for testing and also reveals how the
 markup can look in the wild.
@@ -40,6 +40,12 @@ For now, the usage is simply:
 or you can install it with pip and then simply use:
 
 `text_divider.py FILENAME [OUTPUT FILENAME]`
+
+Of course,
+
+`text_divider.py --help`
+
+will include other tricks available from the command-line interface.
 
 or you can get a bit fancier and make use of more methods using it as a module:
 
