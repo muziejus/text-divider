@@ -72,6 +72,9 @@ class Text():
         return list
 
     def speakers(self, speaker):
+        """
+        Gives all of the dialogue of a specific speaker in one string.
+        """
         lines = self.parse()
         speaker_lines = [line['text'] for line in lines if line['speaker'] == speaker]
         if(len(speaker_lines) == 0):
@@ -79,6 +82,9 @@ class Text():
         return " ".join(speaker_lines)
 
     def all_speakers(self):
+        """
+        Gives a list of tuples of the form (speaker, lines of dialogue)
+        """
         lines = self.parse()
         speakers = set([line['speaker'] for line in lines])
         list = []
@@ -88,6 +94,9 @@ class Text():
         return list
 
     def to_csv(self, output):
+        """
+        Dumps all the data to a (tab-delimited) .csv
+        """
         lines = self.parse()
         output.write("CHAPTER\tSPEAKER\tTEXT\n")
         for line in lines:
