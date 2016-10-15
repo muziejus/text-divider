@@ -8,6 +8,7 @@
 
 import click # make the command line version easy
 import re
+import os
 
 @click.command()
 @click.argument('input') #, type=click.File('rb'))
@@ -93,6 +94,21 @@ class Text():
             list.append((speaker, lines_of_dialogue))
         return list
 
+    def export_speakers_as_text(self, output_dir = "speakers_export"):
+        # this should be an option available in the cli.
+        # and the output dir should be passable from the cli.
+        """
+        Exports each speaker’s dialogue as a string into its own text file.
+        """
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        speakers = [speaker[0] for speaker in self.all_speakers()]
+        for speaker in speakers:
+            if not speaker == None:
+                f = open("{0}/{1}.txt".format(output_dir, self.parameterize(speaker)), "w")
+                f.write(self.speakers(speaker))
+                f.close()
+
     def to_csv(self, output):
         """
         Dumps all the data to a (tab-delimited) .csv
@@ -102,7 +118,7 @@ class Text():
         for line in lines:
             output.write("{0}\t{1}\t{2}\n".format(line['chapter'], line['speaker'], line['text']))
 
-    def parameterize(string):
+    def parameterize(self, string):
         """
         Strips down a string to make a filename.
         """
