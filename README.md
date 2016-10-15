@@ -45,11 +45,12 @@ or
 
 ```
 >>> import text_divider as td
->>> divided_text = td.parse('FILENAME')
->>> speakers = divided_text.all_speakers() # returns speakers and the lines of dialogue
->>> print(speakers)
+>>> text = td.Text('sample.txt', 'out.csv')
+>>> speakers = text.all_speakers() # returns speakers and the lines of dialogue
+>>> speakers
 [('Mr. Carraway', 3), ('Tom', 2), ('Daisy', 2), (None, 18), ('Nick', 3)]
->>> nick = divided_text.speakers('Nick') # returns a string of all of the speaker’s dialogue
+>>> nick = text.speakers('Nick') # returns a string of all of the speaker’s dialogue
+>>> nick
 'The whole town is desolate. All the cars have the left rear wheel painted black as a mourning wreath, and there’s a persistent wail all night along the north shore.'
 ```
 
