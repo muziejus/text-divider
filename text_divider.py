@@ -93,5 +93,11 @@ class Text():
         for line in lines:
             output.write("{0}\t{1}\t{2}\n".format(line['chapter'], line['speaker'], line['text']))
 
+    def parameterize(string):
+        """
+        Strips down a string to make a filename.
+        """
+        return "".join([c.lower() for c in string if c.isalpha() or c.isdigit()]).rstrip()
+
 if __name__ == '__main__':
     cli()
