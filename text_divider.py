@@ -72,6 +72,13 @@ class Text():
                 list.append({"text": text, "speaker": speaker, "chapter": chapter})
         return list
 
+    def speakers(self, speaker):
+        lines = self.parse()
+        speaker_lines = [line['text'] for line in lines if line['speaker'] == speaker]
+        if(len(speaker_lines) == 0):
+            raise Exception("No such speaker found!")
+        return " ".join(speaker_lines)
+
     def toCsv(self):
         lines = self.parse()
         self.output.write("CHAPTER\tSPEAKER\tTEXT\n")
