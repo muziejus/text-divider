@@ -105,10 +105,13 @@ class Text():
             os.makedirs(output_dir)
         speakers = [speaker[0] for speaker in self.all_speakers()]
         for speaker in speakers:
-            if not speaker == None:
-                f = open("{0}/{1}.txt".format(output_dir, self.parameterize(speaker)), "w")
-                f.write(self.speakers(speaker))
-                f.close()
+            if speaker == None:
+                speaker_file = "narration"
+            else:
+                speaker_file = self.parameterize(speaker)
+            f = open("{0}/{1}.txt".format(output_dir, speaker_file), "w")
+            f.write(self.speakers(speaker))
+            f.close()
 
     def to_csv(self, output):
         """
