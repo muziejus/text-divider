@@ -52,6 +52,7 @@ or you can get a bit fancier and make use of more methods using it as a module:
 >>> nick = text.speakers('Nick') # returns a string of all of the speaker’s dialogue
 >>> nick
 'The whole town is desolate. All the cars have the left rear wheel painted black as a mourning wreath, and there’s a persistent wail all night along the north shore.'
+>>> text.export_speakers_to_txt('speakers_dir') # creates a “speakers_dir” and a separate text file for each speaker.
 ```
 
 ## Output
