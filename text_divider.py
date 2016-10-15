@@ -11,7 +11,7 @@ import re
 import os
 
 @click.command()
-@click.option('--speakers-export', type=click.Path(file_okay=False, writable=True), default="speakers_export", help="This is the directory to which the separate speakers’ files will be exported. Setting this automatically triggers the export command.")
+@click.option('--speakers-export', type=click.Path(file_okay=False, writable=True), help="This is the directory to which the separate speakers’ files will be exported. Setting this automatically triggers the export command.")
 @click.argument('input') #, type=click.File('rb'))
 @click.argument('output', type=click.File('w'), default='-', required=False)
 def cli(input, output, speakers_export):
