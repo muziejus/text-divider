@@ -14,20 +14,19 @@ character’s dialogue, for example.
 Hoover’s markup is:
 
 ```
-#<1>    text division level 1
+<1>    text division level 1
 #<2>    text division level 2
 #<3>    text division level 3
 #<4>    text division level 4
 #[ ]       Letter writer
 #{ }      Letter addressee
-#/          new speaker (character)
+/          new speaker (character)
 #\          speech marker
 #>         copy without processing
 #^          special character follows
 ```
 
-Every tag that is “commented out” with a `#` is currently unimplemented. My
-goal is to start with dialogue, move to text divisions, and then further.
+Every tag that is “commented out” with a `#` is currently unimplemented. 
 
 The file `sample.txt` is the file used for testing and also reveals how the
 markup can look in the wild.
@@ -36,14 +35,18 @@ markup can look in the wild.
 
 For now, the usage is simply:
 
-`python text_divider.py [FILENAME]`
+`python text_divider.py FILENAME [OUTPUT FILENAME]`
+
+or you can install it with pip and then simply use:
+
+`text_divider.py FILENAME [OUTPUT FILENAME]`
 
 or
 
 ```
 >>> import text_divider as td
 >>> divided_text = td.parse('FILENAME')
->>> speakers = divided_text.speakers # returns speakers and the lines of dialogue
+>>> speakers = divided_text.all_speakers() # returns speakers and the lines of dialogue
 [('Alice', 15), ('Bob', 17)]
 >>> alice = divided_text.speakers('Alice') # returns a string of all of the speaker’s dialogue
 'Hi, Bob, how are you? I’m also fine, thanks for asking. Yes, I’d love to…'

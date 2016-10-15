@@ -53,27 +53,30 @@ class Text():
         """
         list = []
         speaker = None
+        chapter = None
         for line in self.lines:
             text = line
             if(re.search(r'^\s*$', line)): # blank line reset
                 speaker = None
             else:
-                if line[0] == '/': # dialogue trigger
-                    # print("dialogue triggered")
-                    speaker = line.split('"')[0][1:]
-                    text = line.split('"')[1]
+                if(line[0] == '/'): # dialogue trigger
+                    match = re.match(r'/([^"]*)"(.*)$', line)
+                    speaker = match.group(1)
+                    text = match.group(2)
                 if(speaker != None): # strip trailing " from dialogue.
-                    if(re.search(r'"$', line)):
-                        line = re.sub(r'"$', '', line)
-                        text = line
-                list.append({"text": text, "speaker": speaker})
+                    if(re.search(r'"\s*$', text)):
+                        text = re.sub(r'"\s*$', '', text)
+                if(line[0:3] == "<1>"):
+                    chapter = line[3:]
+                    text = line[3:]
+                list.append({"text": text, "speaker": speaker, "chapter": chapter})
         return list
 
     def toCsv(self):
         lines = self.parse()
-        self.output.write("SPEAKER\tTEXT\n")
+        self.output.write("CHAPTER\tSPEAKER\tTEXT\n")
         for line in lines:
-            self.output.write("{0}\t{1}\n".format(line['speaker'], line['text']))
+            self.output.write("{0}\t{1}\t{2}\n".format(line['chapter'], line['speaker'], line['text']))
 
 if __name__ == '__main__':
     cli()
