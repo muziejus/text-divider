@@ -11,7 +11,7 @@ character’s dialogue, for example.
 
 ## Markup syntax
 
-Hoover’s markup is:
+Prof. Hoover’s markup is:
 
 ```
 <1>    text division level 1
@@ -41,11 +41,11 @@ or you can install it with pip and then simply use:
 
 `text_divider.py FILENAME [OUTPUT FILENAME]`
 
-or
+or you can get a bit fancier and make use of more methods using it as a module:
 
 ```
 >>> import text_divider as td
->>> text = td.Text('sample.txt', 'out.csv')
+>>> text = td.Text('sample.txt')
 >>> speakers = text.all_speakers() # returns speakers and the lines of dialogue
 >>> speakers
 [('Mr. Carraway', 3), ('Tom', 2), ('Daisy', 2), (None, 18), ('Nick', 3)]
@@ -67,6 +67,8 @@ is a dictionary with keys as the column names. The current column names are:
 
 ```
 text: the line of text
+chapter: the chapter name for the current line
+speaker: the speaker of the current line, if one is named.
 ```
 
 ## Rationale

@@ -23,13 +23,12 @@ def cli(input, output):
     
     For more information, see https://github.com/muziejus/text_divider
     """
-    text = Text(input, output)
-    text.to_csv()
+    text = Text(input)
+    text.to_csv(output)
 
 class Text():
-    def __init__(self, input, output):
+    def __init__(self, input):
         self.input = input
-        self.output = output
         self.lines = self.getContentsByLine()
 
     def getContentsByLine(self):
@@ -88,11 +87,11 @@ class Text():
             list.append((speaker, lines_of_dialogue))
         return list
 
-    def to_csv(self):
+    def to_csv(self, output):
         lines = self.parse()
-        self.output.write("CHAPTER\tSPEAKER\tTEXT\n")
+        output.write("CHAPTER\tSPEAKER\tTEXT\n")
         for line in lines:
-            self.output.write("{0}\t{1}\t{2}\n".format(line['chapter'], line['speaker'], line['text']))
+            output.write("{0}\t{1}\t{2}\n".format(line['chapter'], line['speaker'], line['text']))
 
 if __name__ == '__main__':
     cli()
