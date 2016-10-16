@@ -69,6 +69,9 @@ class Text():
                     match = re.match(r'/([^"“]*)["“](.*)$', line)
                     speaker = match.group(1)
                     text = match.group(2)
+                elif(line[0] == '\\'): # reporting clause trigger
+                    speaker = "Reporting clause"
+                    text = line[1:]
                 if(speaker != None): # strip trailing " from dialogue.
                     if(re.search(r'["”]\s*$', text)):
                         text = re.sub(r'["”]\s*$', '', text)

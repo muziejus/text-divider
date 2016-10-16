@@ -21,7 +21,7 @@ Prof. Hoover’s markup is:
 #[ ]       Letter writer
 #{ }      Letter addressee
 /          new speaker (character)
-#\          speech marker
+\          reporting clause (“speech marker”)
 #>         copy without processing
 #^          special character follows
 ```
@@ -31,9 +31,10 @@ Every tag that is commented out with a `#` is currently unimplemented.
 Dialogue, as noted above, is triggered by the `/`. All text between that and
 the first `“` or `"` is understood to be the character’s name, and everything
 after the quote marker is understood to be dialogue. It currently does not
-support UK-style single-quoting, guillemets (`«»`), German-style low-9-quoting (`„“`),
-or Russian/Joyce-style quotation dashes. It strikes me that converting those on the
-fly to the pattern the system does understand can be done with a vim macro.
+support UK-style single-quoting, guillemets (`«»`), German-style low-9-quoting
+(`„“`), or Russian/Joyce-style quotation dashes. It strikes me that converting
+those on the fly to the pattern the system does understand can be done with a
+vim macro.
 
 Dialogue ends with a blank line. Hence a line like:
 
@@ -46,7 +47,7 @@ would be marked up as:
 ```
 /Alice H.“Hello,”
 
-said Alice,
+\said Alice,
 
 /Alice H.“And good-bye!”
 
@@ -57,8 +58,8 @@ With two handy vim macros, breaking this up becomes rather easy. In a speakers
 export, Alice H.’s dialogue would be concatenated into a file called
 `aliceh.txt`.
 
-Prof. Hoover’s system also lets you mark the “reporting clause” (“said Alice,”
-in the example above), but that feature is not yet implemented here.
+Noting reporting clauses is done with a `\\`, which lets them be separated from
+the regular narrative, if you like.
 
 The file
 [`sample.txt`](https://github.com/muziejus/text_divider/blob/master/sample.txt)

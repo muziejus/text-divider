@@ -14,7 +14,7 @@ that I've been turning over in my mind ever since.
 
 /Mr. Carraway"Whenever you feel like criticizing any one," 
 
-he told me, 
+\he told me, 
 
 /Mr. Carraway“just remember that all the people in this world haven't had the
 advantages that you've had.”
@@ -24,7 +24,7 @@ a dozen people had sent their love through me.
 
 /Daisy"Do they miss me?"
 
-she cried ecstatically.
+\she cried ecstatically.
 
 /Nick"The whole town is desolate. All the cars have the left rear wheel
 painted black as a mourning wreath, and there's a persistent wail all night
@@ -40,7 +40,7 @@ shrink away from a certain desolate area of land.
 
 /Tom"We're getting off,"
 
-he insisted. 
+\he insisted. 
 
 /Tom"I want you to meet my girl."
 
