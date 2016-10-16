@@ -178,7 +178,7 @@ substitution would be necessary. In the case of guillemets, for example:
 
 ```
 ^:s/«/"/g<Ret>:s/»/"/g<Ret>f"lli<Ret><Ret>\<Esc>{{ji/<Esc> 
-J^:s/»/"/g<Ret>f"i<Ret><Ret>/<Esc>
+J^:s/«/"/g<Ret>:s/»/"/g<Ret>f"i<Ret><Ret>/<Esc>
 ```
 
 ## Copyright, etc.
