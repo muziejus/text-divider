@@ -153,8 +153,9 @@ This gets us to:
 all the people in this world haven't had the advantages that you've had."
 ```
 
-with the cursor right after the `/`, meaning that one can quickly type in the
-name of the speaker. Then you move to the next line and fire the next macro:
+with the cursor right after the `/`, meaning that one can quickly type (or
+paste) in the name of the speaker (`Mr. Carraway` in this case). Then you move
+to the next line and fire the next macro:
 
 ```
 J^f"i<Ret><Ret>/<Esc>
@@ -170,11 +171,10 @@ This gets us to:
 /"just remember that all the people in this world haven't had the advantages that you've had."
 ```
 
-With the cursor right by the second `/`, allowing you to type in the name again
-(or paste in the contents of a register). The macros can be changed to use `“`
-or `”` instead of `"`. The script recognizes both dialogue delimiters. For
-other quotation schemes, a quick substitution would be necessary, like in the
-case of guillemets:
+With the cursor right by the second `/`, allowing you to type/paste in the name
+again. The macros can be changed to use `“` or `”` instead of `"`. The script
+recognizes both dialogue delimiters. For other quotation schemes, a quick
+substitution would be necessary. In the case of guillemets, for example:
 
 ```
 ^:s/«/"/g<Ret>:s/»/"/g<Ret>f"lli<Ret><Ret>\<Esc>{{ji/<Esc> 
