@@ -132,6 +132,14 @@ class Text():
         speakers_tuple_list = [(speaker, self.speakers(speaker)) for speaker in speakers]
         self.export_to_txt(output_dir, speakers_tuple_list)
 
+    def export_top_speakers_to_txt(self, top_number = 5, output_dir = "speakers_export"):
+        """
+        Exports the top n speakers’ dialogue as strings into their own text file.
+        The rest are concatenated.
+        """
+        speakers_tuple_list = self.top_speakers(top_number)
+        self.export_to_txt(output_dir, speakers_tuple_list)
+
     def export_sections_to_txt(self, output_dir = "sections_export"):
         """
         Exports each section as a string into its own text file.
