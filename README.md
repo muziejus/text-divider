@@ -60,8 +60,10 @@ export, Alice H.’s dialogue would be concatenated into a file called
 Prof. Hoover’s system also lets you mark the “reporting clause” (“said Alice,”
 in the example above), but that feature is not yet implemented here.
 
-The file `sample.txt` is the file used for testing and also reveals how the
-markup can look in the wild.
+The file
+[`sample.txt`](https://github.com/muziejus/text_divider/blob/master/sample.txt)
+is the file used for testing and also reveals how the markup can look in the
+wild.
 
 ## Usage
 
