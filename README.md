@@ -58,7 +58,7 @@ With two handy vim macros, breaking this up becomes rather easy. In a speakers
 export, Alice H.’s dialogue would be concatenated into a file called
 `aliceh.txt`.
 
-Noting reporting clauses is done with a `\\`, which lets them be separated from
+Noting reporting clauses is done with a `\`, which lets them be separated from
 the regular narrative, if you like.
 
 The file
