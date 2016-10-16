@@ -94,11 +94,35 @@ class Text():
         """
         lines = self.parse()
         speakers = set([line['speaker'] for line in lines])
-        list = []
+        all_speakers = []
         for speaker in speakers:
             lines_of_dialogue = len([line for line in lines if line['speaker'] == speaker])
-            list.append((speaker, lines_of_dialogue))
-        return list
+            all_speakers.append((speaker, lines_of_dialogue))
+        all_speakers = list(reversed(sorted(all_speakers, key=lambda x: x[1])))
+        return all_speakers
+
+    def top_speakers(self, top_number):
+        """
+        Gives the top n speakers in a tuple with the name and the string of dialogue and collapses the rest into one value
+        """
+        all_speakers = self.all_speakers()
+        top_speakers = all_speakers[:top_number]
+        minor_speakers_tuple = self.collapse_speakers(all_speakers[top_number:])
+        speakers_list = []
+        for speaker in top_speakers:
+            speakers_list.append((speaker[0], self.speakers(speaker[0])))
+        speakers_list.append(minor_speakers_tuple)
+        return speakers_list
+
+    def collapse_speakers(self, speakers_list):
+        """
+        Returns a tuple that has the name "Minor speakers" as one value and the
+        concatenated string of all of their dialogue as the second.
+        """
+        collapsed_string = ""
+        for tuple in speakers_list:
+            collapsed_string = collapsed_string + " " + self.speakers(tuple[0])
+        return ("Minor Speakers", collapsed_string)
 
     def export_speakers_to_txt(self, output_dir = "speakers_export"):
         """
