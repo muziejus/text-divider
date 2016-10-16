@@ -84,13 +84,15 @@ or you can get a bit fancier and make use of more methods using it as a module:
 ```
 >>> import text_divider as td
 >>> text = td.Text('sample.txt')
->>> speakers = text.all_speakers() # returns speakers and the lines of dialogue
+>>> speakers = text.all_speakers() # returns speakers sorted by lines of dialogue
 >>> speakers
-[('Mr. Carraway', 3), ('Tom', 2), ('Daisy', 2), (None, 18), ('Nick', 3)]
+[(None, 18), ('Mr. Carraway', 3), ('Nick', 3), ('Daisy', 2), ('Tom', 2)]
 >>> nick = text.speakers('Nick') # returns a string of all of the speaker’s dialogue
 >>> nick
 'The whole town is desolate. All the cars have the left rear wheel painted black as a mourning wreath, and there’s a persistent wail all night along the north shore.'
->>> text.export_speakers_to_txt('speakers_dir') # creates a “speakers_dir” and a separate text file for each speaker.
+>>> text.export_top_speakers_to_txt(3, 'speakers_dir') # creates a “speakers_dir” and
+# a separate text file for the top 3 speakers (including “none” for the narration)
+# and collapses all the rest of the dialogue into a “minorspeakers.txt” file.
 ```
 
 ## Output
