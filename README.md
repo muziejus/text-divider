@@ -144,7 +144,7 @@ I use two macros to move through this quickly. First, on the top line, I use:
 ^f"lli<Ret><Ret>\<Esc>{{ji/<Esc> 
 ```
 
-Gets us to:
+This gets us to:
 
 ```
 /"Whenever you feel like criticizing any one," 
@@ -178,7 +178,7 @@ case of guillemets:
 
 ```
 ^:s/«/"/g<Ret>:s/»/"/g<Ret>f"lli<Ret><Ret>\<Esc>{{ji/<Esc> 
-J^s/»/"/g<Ret>f"i<Ret><Ret>/<Esc>
+J^:s/»/"/g<Ret>f"i<Ret><Ret>/<Esc>
 ```
 
 ## Copyright, etc.
