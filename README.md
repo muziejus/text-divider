@@ -100,10 +100,10 @@ or you can get a bit fancier and make use of more methods using it as a module:
 ## Output
 
 Using it with the command line gives a result similar to that of Prof. Hoover’s
-original spreadsheet. It creates a `.csv` file where each line of text is
+original spreadsheet. It creates a *tab-delimited* `.csv` file where each line of text is
 marked (or not) depending on what division it is in. For example, there might
-be a “Dialogue” column, and the value for the lines could be blank, “Alice,” or
-“Bob,” depending.
+be a “SPEAKER” column, and the value for the lines could be blank, “Mr. Carraway,” or
+“Nick,” depending.
 
 You can additionally pass the `--speakers-export` option with a path to a
 directory, into which the program will place a separate `.txt` file for each
