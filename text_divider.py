@@ -128,34 +128,29 @@ class Text():
         """
         Exports each speaker’s dialogue as a string into its own text file.
         """
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
         speakers = [speaker[0] for speaker in self.all_speakers()]
-        for speaker in speakers:
-            if speaker == None:
-                speaker_file = "narration"
-            else:
-                speaker_file = self.parameterize(speaker)
-            f = open("{0}/{1}.txt".format(output_dir, speaker_file), "w")
-            f.write(self.speakers(speaker))
-            f.close()
+        speakers_tuple_list = [(speaker, self.speakers(speaker)) for speaker in speakers]
+        self.export_to_txt(output_dir, speakers_tuple_list)
 
     def export_sections_to_txt(self, output_dir = "sections_export"):
         """
         Exports each section as a string into its own text file.
         """
+        sections = set([line['section_one'] for line in self.parse()])
+        sections_tuple_list = [(section, " ".join([line['text'] for line in self.parse() if line['section_one'] == section])) for section in sections]
+        self.export_to_txt(output_dir, sections_tuple_list)
+ 
+    def export_to_txt(self, output_dir, tuple_list):
+        """
+        Creates an output directory and then creates a bunch of files based on
+        a list of tuples of the format ("name", "text contents")
+        """
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
-        sections = set([line['section_one'] for line in self.parse()])
-        for section in sections:
-            if section == None:
-                section_file = "none"
-            else:
-                section_file = self.parameterize(section)
-            f = open("{0}/{1}.txt".format(output_dir, section_file), "w")
-            f.write(" ".join([line['text'] for line in self.parse() if line['section_one'] == section]))
+        for tuple in tuple_list:
+            f = open("{0}/{1}.txt".format(output_dir, self.parameterize(str(tuple[0]))), "w")
+            f.write(tuple[1])
             f.close()
-        
 
     def to_csv(self, output):
         """
@@ -171,6 +166,7 @@ class Text():
         Strips down a string to make a filename.
         """
         return "".join([c.lower() for c in string if c.isalpha() or c.isdigit()]).rstrip()
+
 
 if __name__ == '__main__':
     cli()
