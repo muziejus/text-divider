@@ -34,7 +34,7 @@ after the quote marker is understood to be dialogue. It currently does not
 support UK-style single-quoting, guillemets (`«»`), German-style low-9-quoting
 (`„“`), or Russian/Joyce-style quotation dashes. It strikes me that converting
 those on the fly to the pattern the system does understand can be done with a
-vim macro.
+vim macro (see below).
 
 Dialogue ends with a blank line. Hence a line like:
 
@@ -54,7 +54,7 @@ would be marked up as:
 Then she walked away.
 ```
 
-With two handy vim macros, breaking this up becomes rather easy. In a speakers
+With two handy vim macros (see below), breaking this up becomes rather easy. In a speakers
 export, Alice H.’s dialogue would be concatenated into a file called
 `aliceh.txt`.
 
@@ -128,6 +128,58 @@ version of *[The Great Gastby](http://gutenberg.net.au/ebooks02/0200041.txt)*
 so that I could programmatically get the dialogue on the fly. It strikes me
 that the light markup of this program is more flexible and quicker to implement
 than, say, creating a TEI version of the novel, etc., etc. 
+
+## vim macros
+
+Given a raw set of lines like:
+
+```
+"Whenever you feel like criticizing any one," he told me, "just remember that
+all the people in this world haven't had the advantages that you've had."
+```
+
+I use two macros to move through this quickly. First, on the top line, I use:
+
+```
+^f"lli<Ret><Ret>\<Esc>{{ji/<Esc> 
+```
+
+Gets us to:
+
+```
+/"Whenever you feel like criticizing any one," 
+
+\he told me, "just remember that
+all the people in this world haven't had the advantages that you've had."
+```
+
+with the cursor right after the `/`, meaning that one can quickly type in the
+name of the speaker. Then you move to the next line and fire the next macro:
+
+```
+J^f"i<Ret><Ret>/<Esc>
+```
+
+This gets us to:
+
+```
+/Mr. Carraway"Whenever you feel like criticizing any one," 
+
+\he told me, 
+
+/"just remember that all the people in this world haven't had the advantages that you've had."
+```
+
+With the cursor right by the second `/`, allowing you to type in the name again
+(or paste in the contents of a register). The macros can be changed to use `“`
+or `”` instead of `"`. The script recognizes both dialogue delimiters. For
+other quotation schemes, a quick substitution would be necessary, like in the
+case of guillemets:
+
+```
+^:s/«/"/g<Ret>:s/»/"/g<Ret>f"lli<Ret><Ret>\<Esc>{{ji/<Esc> 
+J^s/»/"/g<Ret>f"i<Ret><Ret>/<Esc>
+```
 
 ## Copyright, etc.
 
