@@ -151,8 +151,9 @@ class Text():
 
     def export_sections_to_txt(self, output_dir = "sections_export"):
         """
-        Exports each section as a string into its own text file. It recursively burrows
-        through sections, meaning there will be duplication in the corpora.
+        Exports each section as a string into its own text file. It does not do
+        so recursively, meaning there is no duplication between files.
+        Concatenating them together would recreate the original file. 
         """
         sections = set([line["section"] for line in self.parse()])
         sections_tuple_list = [(section, self.collapse_section(section)) for section in sections]
