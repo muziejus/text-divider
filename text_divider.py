@@ -59,7 +59,9 @@ class Text():
         """
         list = []
         speaker = None
+        section = None
         section_one = None
+        section_two = None
         for line in self.lines:
             text = line
             if(re.search(r'^\s*$', line)): # blank line reset
@@ -77,8 +79,12 @@ class Text():
                         text = re.sub(r'["”]\s*$', '', text)
                 if(line[0:3] == "<1>"):
                     section_one = line[3:]
+                    section = section_one
                     text = line[3:]
-                list.append({"text": text, "speaker": speaker, "section_one": section_one})
+                if(line[0:3] == "<2>"):
+                    section = section_one + " - " + line[3:]
+                    text = line[3:]
+                list.append({"text": text, "speaker": speaker, "section": section})
         return list
 
     def speakers(self, speaker):
@@ -145,11 +151,15 @@ class Text():
 
     def export_sections_to_txt(self, output_dir = "sections_export"):
         """
-        Exports each section as a string into its own text file.
+        Exports each section as a string into its own text file. It recursively burrows
+        through sections, meaning there will be duplication in the corpora.
         """
-        sections = set([line['section_one'] for line in self.parse()])
-        sections_tuple_list = [(section, " ".join([line['text'] for line in self.parse() if line['section_one'] == section])) for section in sections]
+        sections = set([line["section"] for line in self.parse()])
+        sections_tuple_list = [(section, self.collapse_section(section)) for section in sections]
         self.export_to_txt(output_dir, sections_tuple_list)
+
+    def collapse_section(self, section_name):
+        return " ".join([line['text'] for line in self.parse() if line["section"] == section_name])
  
     def export_to_txt(self, output_dir, tuple_list):
         """
@@ -168,9 +178,9 @@ class Text():
         Dumps all the data to a (tab-delimited) .csv
         """
         lines = self.parse()
-        output.write("SECTION 1\tSPEAKER\tTEXT\n")
+        output.write("SECTION\tSPEAKER\tTEXT\n")
         for line in lines:
-            output.write("{0}\t{1}\t{2}\n".format(line['section_one'], line['speaker'], line['text']))
+            output.write("{0}\t{1}\t{2}\n".format(line['section'], line['speaker'], line['text']))
 
     def parameterize(self, string):
         """

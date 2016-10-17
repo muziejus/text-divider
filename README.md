@@ -15,7 +15,7 @@ Prof. Hoover’s markup is:
 
 ```
 <1>    text division level 1
-#<2>    text division level 2
+<2>    text division level 2
 #<3>    text division level 3
 #<4>    text division level 4
 #[ ]       Letter writer
@@ -54,12 +54,12 @@ would be marked up as:
 Then she walked away.
 ```
 
-With two handy vim macros (see below), breaking this up becomes rather easy. In a speakers
-export, Alice H.’s dialogue would be concatenated into a file called
+With two handy vim macros (see below), breaking this up becomes rather easy. In
+a speakers export, Alice H.’s dialogue would be concatenated into a file called
 `aliceh.txt`.
 
-Noting reporting clauses is done with a `\`, which lets them be separated from
-the regular narrative, if you like.
+Noting reporting clauses is done with a backslash, which lets them be separated
+from the regular narrative, if you like.
 
 The file
 [`sample.txt`](https://github.com/muziejus/text_divider/blob/master/sample.txt)
@@ -108,15 +108,15 @@ be a “SPEAKER” column, and the value for the lines could be blank, “Mr. Ca
 
 You can additionally pass the `--speakers-export` option with a path to a
 directory, into which the program will place a separate `.txt` file for each
-speaker. The same happens with `--sections-export`, but for the top-level section.
+speaker. The same happens with `--sections-export`, but for sections.
 
 Using it in the interpreter or within a program creates a list where each value
 is a dictionary with keys as the column names. The current column names are:
 
 ```
 text: the line of text
-section-one: the name of the top-level section for the current line
-speaker: the speaker of the current line, if one is named.
+section: the names of the sections as a tree (for example, “Book I - Chapter 1”)
+speaker: the speaker of the current line, if one is named, or other marking.
 ```
 
 ## Rationale

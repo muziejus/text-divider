@@ -1,4 +1,5 @@
 # Segments from _The Great Gatsby_, by F. Scott Fitzgerald
+<1>The Great Gatsby
 
 Then wear the gold hat, if that will move her;
 If you can bounce high, bounce for her too,
@@ -7,7 +8,7 @@ I must have you!"
 
 THOMAS PARKE D'INVILLIERS.
 
-<1>Chapter 1
+<2>Chapter 1
 
 In my younger and more vulnerable years my father gave me some advice
 that I've been turning over in my mind ever since.
@@ -32,7 +33,7 @@ along the north shore."
 
 /Daisy"How gorgeous! Let's go back, Tom. To-morrow!" 
 
-<1>Chapter 2
+<2>Chapter 2
 
 About half way between West Egg and New York the motor road hastily
 joins the railroad and runs beside it for a quarter of a mile, so as to
