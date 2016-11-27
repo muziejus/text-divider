@@ -158,7 +158,7 @@ paste) in the name of the speaker (`Mr. Carraway` in this case). Then you move
 to the next line and fire the next macro:
 
 ```
-J^f"i<Ret><Ret>/<Esc>
+J^f"i<Ret><Ret><Esc>o<Esc>ji/<Esc>
 ```
 
 This gets us to:
