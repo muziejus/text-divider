@@ -69,7 +69,10 @@ class Text():
             else:
                 if(line[0] == '/'): # dialogue trigger
                     match = re.match(r'/([^"“]*)["“](.*)$', line)
-                    speaker = match.group(1)
+                    try:
+                        speaker = match.group(1)
+                    except AttributeError:
+                        print("Failed line:{0}".format(line))
                     text = match.group(2)
                 elif(line[0] == '\\'): # reporting clause trigger
                     speaker = "Reporting clause"
